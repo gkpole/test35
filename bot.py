@@ -44,7 +44,7 @@ def no_sub():
     urlkb = InlineKeyboardMarkup(row_width=1)
     urlButton = InlineKeyboardButton(text='Welat VPN', url=channel_us)
     urlButton2 = InlineKeyboardButton(text='✅ | Проверить', callback_data="okey")
-    urlkb.add(urlButton, urlButton 2)
+    urlkb.add(urlButton, urlButton2)
     return urlkb
 
 async def ch_sub(sid):

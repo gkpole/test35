@@ -42,8 +42,9 @@ channel_us = "ссылка на канал"
 
 def no_sub():
     urlkb = InlineKeyboardMarkup(row_width=1)
-    urlButton = InlineKeyboardButton(text='Канал 1', url=channel_us)
-    urlkb.add(urlButton)
+    urlButton = InlineKeyboardButton(text='Welat VPN', url=channel_us)
+    urlButton2 = InlineKeyboardButton(text='✅ | Проверить", callback_data="okey")
+    urlkb.add(urlButton, urlButton 2)
     return urlkb
 
 async def ch_sub(sid):
@@ -54,11 +55,11 @@ async def ch_sub(sid):
     else:
         await bot.send_message(sid, "Подпишись на каналы для продолжения", reply_markup=no_sub())
 
-@dp.message_handler(commands="start")
-async def start(message: types.Message):
-    if await ch_sub(message.chat.id) == 1:
+@dp.callback_query_handler("okey)
+async def start(call: types.CallbackQuery):
+    if await ch_sub(call.from_user.id) == 1:
         try:
-            pon = db1.get_zaya(message.chat.id)
+            pon = db1.get_zaya(call.from_user.id)
             if pon == None:
                 keyboard = types.InlineKeyboardMarkup()
                 keyboard.add(types.InlineKeyboardButton(text="🛡️ | VPN", callback_data="zaya"))
@@ -71,7 +72,7 @@ async def start(message: types.Message):
                 await message.answer('Вы уже отправили заявку!', reply_markup=keyboard)
 
         except:
-            db1.add_user(message.chat.id)
+            db1.add_user(call.from_user.id)
             keyboard = types.InlineKeyboardMarkup()
             keyboard.add(types.InlineKeyboardButton(text="🛡️ | VPN", callback_data="zaya"))
             keyboard.add(types.InlineKeyboardButton(text="🔺 | Тех. помощь", url="t.me/welat_vpn_collaborator"))

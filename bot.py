@@ -55,7 +55,7 @@ async def ch_sub(sid):
     else:
         await bot.send_message(sid, "Подпишись на каналы для продолжения", reply_markup=no_sub())
 
-@dp.callback_query_handler("okey)
+@dp.callback_query_handler("okey")
 async def start(call: types.CallbackQuery):
     if await ch_sub(call.from_user.id) == 1:
         try:
